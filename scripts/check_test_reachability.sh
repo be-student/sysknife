@@ -31,6 +31,8 @@ check_suite() {
             return 1
         fi
     done
+
+    return 0
 }
 
 check_suite release

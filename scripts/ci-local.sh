@@ -262,6 +262,7 @@ run_hygiene_group() {
     printf '\n### hygiene\n'
     run_step 'hygiene: check_repo_completeness.sh' bash "$repo_root/scripts/check_repo_completeness.sh"
     run_step 'hygiene: check_test_reachability.sh' bash "$repo_root/scripts/check_test_reachability.sh"
+    run_step 'hygiene: test-reachability.test.sh' bash "$repo_root/tests/release/test-reachability.test.sh"
     run_step 'hygiene: check_release_versions.sh' bash "$repo_root/scripts/check_release_versions.sh"
     run_step 'hygiene: public-claims.test.sh' bash "$repo_root/tests/release/public-claims.test.sh"
     run_step 'hygiene: npm test --prefix packages/setup' npm test --prefix "$repo_root/packages/setup"
