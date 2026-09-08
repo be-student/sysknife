@@ -6,7 +6,6 @@ gate_files=(
     "$repo_root/.github/workflows/ci.yml"
     "$repo_root/.github/workflows/e2e.yml"
     "$repo_root/.github/workflows/release.yml"
-    "$repo_root/scripts/ci-local.sh"
 )
 
 check_suite() {

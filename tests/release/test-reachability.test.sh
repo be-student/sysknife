@@ -38,4 +38,15 @@ grep -Fq 'no tests discovered in tests/e2e/*.test.sh' <<< "$output" || {
     exit 1
 }
 
-printf 'test-reachability test: orphan and empty-suite failures validated.\n'
+touch "$fixture/tests/e2e/reachable.test.sh" "$fixture/tests/release/local-only.test.sh"
+printf '%s\n' 'run: bash tests/release/local-only.test.sh' >> "$fixture/scripts/ci-local.sh"
+if output="$(bash "$fixture/scripts/check_test_reachability.sh" "$fixture" 2>&1)"; then
+    printf 'test-reachability test: local-only test unexpectedly passed\n' >&2
+    exit 1
+fi
+grep -Fq 'test is not invoked by a gate: tests/release/local-only.test.sh' <<< "$output" || {
+    printf 'test-reachability test: local-only diagnostic omitted its path: %s\n' "$output" >&2
+    exit 1
+}
+
+printf 'test-reachability test: orphan, empty-suite, and local-only failures validated.\n'
